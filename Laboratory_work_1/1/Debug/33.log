@@ -1,0 +1,5 @@
+﻿  Source.c
+C:\Users\User\source\repos\33\Source.c(6,7): warning C4013:  srand: нет определения; предполагается "extern" с возвратом типа "int"
+C:\Users\User\source\repos\33\Source.c(6,12): warning C4013:  time: нет определения; предполагается "extern" с возвратом типа "int"
+C:\Users\User\source\repos\33\Source.c(10,21): warning C4013:  rand: нет определения; предполагается "extern" с возвратом типа "int"
+  33.vcxproj -> C:\Users\User\source\repos\33\Debug\33.exe
