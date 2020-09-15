@@ -1,0 +1,5 @@
+﻿  main.c
+D:\C++\PL\Laboratory_work_2\2\second\main.c(8,7): warning C4013:  srand: нет определения; предполагается "extern" с возвратом типа "int"
+D:\C++\PL\Laboratory_work_2\2\second\main.c(8,12): warning C4013:  time: нет определения; предполагается "extern" с возвратом типа "int"
+D:\C++\PL\Laboratory_work_2\2\second\main.c(12,20): warning C4013:  rand: нет определения; предполагается "extern" с возвратом типа "int"
+  second.vcxproj -> D:\C++\PL\Laboratory_work_2\2\second\Debug\second.exe
