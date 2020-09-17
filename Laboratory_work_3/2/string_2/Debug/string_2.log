@@ -1,0 +1,4 @@
+﻿  main.c
+D:\C++\PL\Laboratory_work_3\2\string_2\main.c(22,6): warning C4013:  gets: нет определения; предполагается "extern" с возвратом типа "int"
+D:\C++\PL\Laboratory_work_3\2\string_2\main.c(29,8): warning C4013:  system: нет определения; предполагается "extern" с возвратом типа "int"
+  string_2.vcxproj -> D:\C++\PL\Laboratory_work_3\2\string_2\Debug\string_2.exe
