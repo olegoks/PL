@@ -49,7 +49,7 @@ int main() {
 
 	for (size_t i = 0; i < counter; i++)
 	{
-		FindWord(base,base_index );
+		FindWord(base, base_index );
 		printf("_");
 		base_index++;
 		FindWord(base, base_index);
