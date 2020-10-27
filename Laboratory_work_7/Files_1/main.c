@@ -8,8 +8,6 @@ struct employee {
 
 };
 
-
-
 typedef unsigned long int FileSize;
 
 unsigned long int ReturnFileSize(FILE*const file_stream) {
@@ -209,7 +207,7 @@ void ProcessCommand(enum Command command, struct employee** employers, unsigned 
 		for (size_t i = 0; i < *number_of_elements; i++)
 		{
 			struct employee current_employee = (*employers)[i];
-			int department_found = !strcmp(current_employee.name, department);
+			int department_found = !strcmp(current_employee.department, department);
 			
 			if (department_found) {
 
@@ -220,8 +218,11 @@ void ProcessCommand(enum Command command, struct employee** employers, unsigned 
 
 			
 		}
-		printf("Общая сумма выплат: %d.\n", sum);
-		printf("Средмесячный заработок сотрудника: %d.\n", (sum / employers_in_department));
+		if (employers_in_department == 0) printf("Нет такого отдела.\n");
+		else {
+			printf("Общая сумма выплат: %d.\n", sum);
+			printf("Средмесячный заработок сотрудника: %d.\n", (sum / employers_in_department));
+		}
 		system("pause");
 		break;
 	}
