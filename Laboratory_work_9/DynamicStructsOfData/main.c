@@ -143,12 +143,80 @@ void count_vertexs(const struct Vertex* node) {
             parent_state->child_state = NULL;
         }
         else {
+
             _root_state = NULL;
+
         }
     }
 
 }
 
+
+void count_vertexs_1(const struct Vertex* node) {
+
+    if ((node->left_child_ == NULL && node->right_child_ != NULL) || (node->left_child_ != NULL && node->right_child_ == NULL))counter++;
+
+    struct node_print_state_t* parent_state;
+
+    if (_root_state != NULL) {
+        //printf(" ");
+        struct node_print_state_t* s = _root_state;
+        while (s->child_state != NULL) {
+            //printf(s->printing_last_child ? "  " : "| ");
+            s = s->child_state;
+        }
+        parent_state = s;
+        //printf(parent_state->printing_last_child ? "L" : "+");
+    }
+    else {
+        parent_state = NULL;
+    }
+    //printf(">%i\n", node->data_);
+
+    if ((node->left_child_ != NULL) || (node->right_child_ != NULL)) { // если есть дети
+       
+    
+        
+        struct node_print_state_t s;
+        if (parent_state != NULL) {
+            parent_state->child_state = &s;
+        }
+        else {
+            _root_state = &s;
+        }
+        s.child_state = NULL;
+
+        // печатаем детей
+
+        if (node->left_child_ != NULL) {
+            s.printing_last_child = (node->right_child_ == NULL);
+            count_vertexs(node->left_child_);
+        }
+        if (node->right_child_ != NULL) {
+            s.printing_last_child = 1;
+            count_vertexs(node->right_child_);
+        }
+
+        if (parent_state != NULL) {
+            parent_state->child_state = NULL;
+        }
+        else {
+
+            _root_state = NULL;
+
+        }
+
+    };
+
+}
+
+void go(struct Vertex* node) {
+
+    if ((node->left_child_ == NULL && node->right_child_ != NULL) || (node->left_child_ != NULL && node->right_child_ == NULL))counter++;
+    if (node->left_child_ != NULL) go(node->left_child_);
+    if (node->right_child_ != NULL) go(node->right_child_);
+
+}
 int main() {
 
 	struct Vertex* tree = new_vertex(0);
@@ -167,9 +235,9 @@ int main() {
 
     }
 
-    print_tree(tree);
+   print_tree(tree);
 
-    count_vertexs(tree);
-    printf(" оличество вершин: %d.", counter);
+    go(tree);
+    printf("Number of vertexs: %d.", counter);
 	return 0;
 }
