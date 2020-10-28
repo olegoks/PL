@@ -99,32 +99,77 @@ void print_tree(const struct Vertex* root) {
         print_subtree(root);
     }
 
-
 }
+unsigned int counter = 0;
+void count_vertexs(const struct Vertex* node) {
 
-void print(const struct Vertex* const root) {
+    struct node_print_state_t* parent_state;
+    if (_root_state != NULL) {
+        //printf(" ");
+        struct node_print_state_t* s = _root_state;
+        while (s->child_state != NULL) {
+            //printf(s->printing_last_child ? "  " : "| ");
+            s = s->child_state;
+        }
+        parent_state = s;
+        //printf(parent_state->printing_last_child ? "L" : "+");
+    }
+    else {
+        parent_state = NULL;
+    }
+    counter++;//printf(">%i\n", node->data_);
 
+    if ((node->left_child_ != NULL) || (node->right_child_ != NULL)) { // если есть дети
+        struct node_print_state_t s;
+        if (parent_state != NULL) {
+            parent_state->child_state = &s;
+        }
+        else {
+            _root_state = &s;
+        }
+        s.child_state = NULL;
 
+        // печатаем детей
+        if (node->left_child_ != NULL) {
+            s.printing_last_child = (node->right_child_ == NULL);
+            count_vertexs(node->left_child_);
+        }
+        if (node->right_child_ != NULL) {
+            s.printing_last_child = 1;
+            count_vertexs(node->right_child_);
+        }
+
+        if (parent_state != NULL) {
+            parent_state->child_state = NULL;
+        }
+        else {
+            _root_state = NULL;
+        }
+    }
 
 }
 
 int main() {
 
 	struct Vertex* tree = new_vertex(0);
-    add_data(tree, 10);
-    add_data(tree, -1);
-    add_data(tree, -5);
-    add_data(tree, 2);
-    add_data(tree, 6);
-    add_data(tree, 6);
-    add_data(tree, -7);
-    add_data(tree, -2);
-    add_data(tree, -1);
-    add_data(tree, 5);
-    add_data(tree, 20);
-    add_data(tree, -3);
-    add_data(tree, 1);
+
+    int input = 1;
+    int input_data = 0;
+
+    while (input) {
+
+        printf("Input new data: ");
+        scanf_s("%d", &input_data);
+       
+        if (!input_data)input = 0;
+        else
+            add_data(tree, input_data);
+
+    }
+
     print_tree(tree);
 
+    count_vertexs(tree);
+    printf(" оличество вершин: %d.", counter);
 	return 0;
 }
